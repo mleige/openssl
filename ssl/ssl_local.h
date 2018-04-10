@@ -631,6 +631,8 @@ struct ssl_session_st {
 # ifndef OPENSSL_NO_SRP
     char *srp_username;
 # endif
+    unsigned char *cache_id;
+    size_t cache_id_len;
     unsigned char *ticket_appdata;
     size_t ticket_appdata_len;
     uint32_t flags;
@@ -1759,6 +1761,9 @@ struct ssl_st {
     void *record_padding_arg;
     size_t block_padding;
 
+    unsigned char *cache_id;
+    size_t cache_id_len;
+
     CRYPTO_RWLOCK *lock;
 
     /* The number of TLS1.3 tickets to automatically send */
@@ -2807,6 +2812,8 @@ void ssl_evp_md_free(const EVP_MD *md);
 int tls_provider_set_tls_params(SSL *s, EVP_CIPHER_CTX *ctx,
                                 const EVP_CIPHER *ciph,
                                 const EVP_MD *md);
+
+long ssl_ctx_set_sess_cache_mode(SSL_CTX *ctx, long new_mode);
 
 # else /* OPENSSL_UNIT_TEST */
 
