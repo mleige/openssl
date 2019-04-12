@@ -14,6 +14,8 @@
 #ifndef OPENSSL_NO_ERR
 
 static const ERR_STRING_DATA SSL_str_reasons[] = {
+    {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_ALGORITHM_FETCH_FAILED),
+    "algorithm fetch failed"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_APPLICATION_DATA_AFTER_CLOSE_NOTIFY),
     "application data after close notify"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_APP_DATA_IN_HANDSHAKE),
@@ -28,6 +30,7 @@ static const ERR_STRING_DATA SSL_str_reasons[] = {
     "bad change cipher spec"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_BAD_CIPHER), "bad cipher"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_BAD_DATA), "bad data"},
+    {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_BAD_DATA_LENGTH), "bad data length"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_BAD_DATA_RETURNED_BY_CALLBACK),
     "bad data returned by callback"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_BAD_DECOMPRESSION), "bad decompression"},
@@ -171,8 +174,6 @@ static const ERR_STRING_DATA SSL_str_reasons[] = {
     "ext length mismatch"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_FAILED_TO_INIT_ASYNC),
     "failed to init async"},
-    {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_ALGORITHM_FETCH_FAILED),
-     "algorithm fetch failed"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_FRAGMENTED_CLIENT_HELLO),
     "fragmented client hello"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_GOT_A_FIN_BEFORE_A_CCS),
@@ -195,6 +196,7 @@ static const ERR_STRING_DATA SSL_str_reasons[] = {
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_INCONSISTENT_EXTMS), "inconsistent extms"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_INSUFFICIENT_SECURITY),
     "insufficient security"},
+    {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_INTERNAL_ERROR), "internal error"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_INVALID_ALERT), "invalid alert"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_INVALID_CCS_MESSAGE),
     "invalid ccs message"},
@@ -536,6 +538,8 @@ static const ERR_STRING_DATA SSL_str_reasons[] = {
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_WRONG_CIPHER_RETURNED),
     "wrong cipher returned"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_WRONG_CURVE), "wrong curve"},
+    {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_WRONG_ENCRYPTION_LEVEL_RECEIVED),
+    "wrong encryption level received"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_WRONG_SIGNATURE_LENGTH),
     "wrong signature length"},
     {ERR_PACK(ERR_LIB_SSL, 0, SSL_R_WRONG_SIGNATURE_SIZE),

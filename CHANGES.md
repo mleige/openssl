@@ -21,6 +21,10 @@ OpenSSL Releases
 OpenSSL 3.0
 -----------
 
+ * Add QUIC API support from BoringSSL.
+
+   *Todd Short*
+
 ### Changes between 1.1.1 and 3.0 alpha 2 [15 May 2020]
 
  * Removed FIPS_mode() and FIPS_mode_set(). These functions are legacy API's
