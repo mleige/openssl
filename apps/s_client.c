@@ -577,6 +577,7 @@ typedef enum OPTION_choice {
     OPT_USE_SRTP, OPT_KEYMATEXPORT, OPT_KEYMATEXPORTLEN, OPT_PROTOHOST,
     OPT_MAXFRAGLEN, OPT_MAX_SEND_FRAG, OPT_SPLIT_SEND_FRAG, OPT_MAX_PIPELINES,
     OPT_READ_BUF, OPT_KEYLOG_FILE, OPT_EARLY_DATA, OPT_REQCAFILE,
+    OPT_TFO,
     OPT_V_ENUM,
     OPT_X_ENUM,
     OPT_S_ENUM, OPT_IGNORE_UNEXPECTED_EOF,
@@ -659,6 +660,9 @@ const OPTIONS s_client_options[] = {
      "Do not load certificates from the default certificates store"},
     {"requestCAfile", OPT_REQCAFILE, '<',
       "PEM format file of CA names to send to the server"},
+#ifdef TCP_FASTOPEN
+    {"tfo", OPT_TFO, '-', "Connect using TCP Fast Open"},
+#endif
     {"dane_tlsa_domain", OPT_DANE_TLSA_DOMAIN, 's', "DANE TLSA base domain"},
     {"dane_tlsa_rrdata", OPT_DANE_TLSA_RRDATA, 's',
      "DANE TLSA rrdata presentation form"},
@@ -1008,6 +1012,7 @@ int s_client_main(int argc, char **argv)
     int sctp_label_bug = 0;
 #endif
     int ignore_unexpected_eof = 0;
+    int tfo = 0;
 
     FD_ZERO(&readfds);
     FD_ZERO(&writefds);
@@ -1514,6 +1519,9 @@ int s_client_main(int argc, char **argv)
         case OPT_STARTTLS:
             if (!opt_pair(opt_arg(), services, &starttls_proto))
                 goto end;
+            break;
+        case OPT_TFO:
+            tfo = 1;
             break;
         case OPT_SERVERNAME:
             servername = opt_arg();
@@ -2123,7 +2131,7 @@ int s_client_main(int argc, char **argv)
 
  re_start:
     if (init_client(&sock, host, port, bindhost, bindport, socket_family,
-                    socket_type, protocol) == 0) {
+                    socket_type, protocol, tfo) == 0) {
         BIO_printf(bio_err, "connect:errno=%d\n", get_last_socket_error());
         BIO_closesocket(sock);
         goto end;
@@ -2196,6 +2204,17 @@ int s_client_main(int argc, char **argv)
 #endif /* OPENSSL_NO_DTLS */
         sbio = BIO_new_socket(sock, BIO_NOCLOSE);
 
+    if (tfo) {
+        BIO_ADDRINFO *bai;
+
+        if (!BIO_lookup_ex(host, port, BIO_LOOKUP_CLIENT, socket_family,
+                           socket_type, protocol, &bai)) {
+            ERR_print_errors(bio_err);
+            goto shut;
+        }
+        (void)BIO_set_conn_address(sbio, BIO_ADDRINFO_address(bai));
+        BIO_ADDRINFO_free(bai);
+    }
     if (nbio_test) {
         BIO *test;
 
