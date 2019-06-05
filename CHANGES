@@ -9,6 +9,11 @@
 
  Changes between 1.1.1 and 3.0.0 [xx XXX xxxx]
 
+  *) Add draft-ietf-tls-certificate-compression support
+     Add brotli compression support
+     Add Zstandard compression support
+     [Todd Short]
+
   *) The test suite is changed to preserve results of each test recipe.
      A new directory test-runs/ with subdirectories named like the
      test recipes are created in the build tree for this purpose.
