@@ -17,7 +17,7 @@
 #include "testutil/output.h"
 #include "testutil/tu_local.h"
 
-#if defined(ZLIB) || defined(BROTLI)
+#if defined(ZLIB) || defined(BROTLI) || defined(ZSTD)
 
 # define COMPRESS  1
 # define EXPAND    0
@@ -125,16 +125,22 @@ static int do_bio_comp(const BIO_METHOD *meth, int n)
 }
 #endif
 
+#ifdef ZLIB
+int test_zlib(int n)
+{
+    return do_bio_comp(BIO_f_zlib(), n);
+}
+#endif
 #ifdef BROTLI
 static int test_brotli(int n)
 {
     return do_bio_comp(BIO_f_brotli(), n);
 }
 #endif
-#ifdef ZLIB
-int test_zlib(int n)
+#ifdef ZSTD
+static int test_zstd(int n)
 {
-    return do_bio_comp(BIO_f_zlib(), n);
+    return do_bio_comp(BIO_f_zstd(), n);
 }
 #endif
 
@@ -145,6 +151,9 @@ int setup_tests(void)
 #endif
 #ifdef BROTLI
     ADD_ALL_TESTS(test_brotli, NUM_SIZES * 4);
+#endif
+#ifdef ZSTD
+    ADD_ALL_TESTS(test_zstd, NUM_SIZES * 4);
 #endif
     return 1;
 }

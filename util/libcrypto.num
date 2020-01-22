@@ -4948,3 +4948,6 @@ EVP_PKEY_CTX_get0_ecdh_kdf_ukm          ?	3_0_0	EXIST::FUNCTION:EC
 COMP_brotli                             ?	3_0_0	EXIST::FUNCTION:COMP
 COMP_brotli_oneshot                     ?	3_0_0	EXIST::FUNCTION:COMP
 BIO_f_brotli                            ?	3_0_0	EXIST::FUNCTION:BROTLI,COMP
+COMP_zstd                               ?	3_0_0	EXIST::FUNCTION:COMP
+COMP_zstd_oneshot                       ?	3_0_0	EXIST::FUNCTION:COMP
+BIO_f_zstd                              ?	3_0_0	EXIST::FUNCTION:COMP,ZSTD

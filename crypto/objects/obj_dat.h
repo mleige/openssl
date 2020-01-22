@@ -1088,7 +1088,7 @@ static const unsigned char so[7845] = {
     0x2B,0x06,0x01,0x05,0x05,0x07,0x08,0x08,       /* [ 7836] OBJ_NAIRealm */
 };
 
-#define NUM_NID 1219
+#define NUM_NID 1220
 static const ASN1_OBJECT nid_objs[NUM_NID] = {
     {"UNDEF", "undefined", NID_undef},
     {"rsadsi", "RSA Data Security, Inc.", NID_rsadsi, 6, &so[0]},
@@ -2308,10 +2308,11 @@ static const ASN1_OBJECT nid_objs[NUM_NID] = {
     {"modp_4096", "modp_4096", NID_modp_4096},
     {"modp_6144", "modp_6144", NID_modp_6144},
     {"modp_8192", "modp_8192", NID_modp_8192},
-    {"BROTLI", "brotli", NID_brotli},
+    {"brotli", "Brotli compression", NID_brotli},
+    {"zstd", "Zstandard compression", NID_zstd},
 };
 
-#define NUM_SN 1210
+#define NUM_SN 1211
 static const unsigned int sn_objs[NUM_SN] = {
      364,    /* "AD_DVCS" */
      419,    /* "AES-128-CBC" */
@@ -2393,7 +2394,6 @@ static const unsigned int sn_objs[NUM_SN] = {
     1202,    /* "BLAKE2SMAC" */
     1056,    /* "BLAKE2b512" */
     1057,    /* "BLAKE2s256" */
-    1218,    /* "BROTLI" */
       14,    /* "C" */
      751,    /* "CAMELLIA-128-CBC" */
      962,    /* "CAMELLIA-128-CCM" */
@@ -2653,6 +2653,7 @@ static const unsigned int sn_objs[NUM_SN] = {
      932,    /* "brainpoolP384t1" */
      933,    /* "brainpoolP512r1" */
      934,    /* "brainpoolP512t1" */
+    1218,    /* "brotli" */
      494,    /* "buildingName" */
      860,    /* "businessCategory" */
      691,    /* "c2onb191v4" */
@@ -3523,9 +3524,10 @@ static const unsigned int sn_objs[NUM_SN] = {
      158,    /* "x509Certificate" */
      160,    /* "x509Crl" */
     1093,    /* "x509ExtAdmission" */
+    1219,    /* "zstd" */
 };
 
-#define NUM_LN 1210
+#define NUM_LN 1211
 static const unsigned int ln_objs[NUM_LN] = {
      363,    /* "AD Time Stamping" */
      405,    /* "ANSI X9.62" */
@@ -3535,6 +3537,7 @@ static const unsigned int ln_objs[NUM_LN] = {
      177,    /* "Authority Information Access" */
      365,    /* "Basic OCSP Response" */
      285,    /* "Biometric Info" */
+    1218,    /* "Brotli compression" */
      179,    /* "CA Issuers" */
      785,    /* "CA Repository" */
     1131,    /* "CMC Certificate Authority" */
@@ -3737,6 +3740,7 @@ static const unsigned int ln_objs[NUM_LN] = {
      184,    /* "X9.57" */
      185,    /* "X9.57 CM ?" */
     1209,    /* "XmppAddr" */
+    1219,    /* "Zstandard compression" */
      478,    /* "aRecord" */
      289,    /* "aaControls" */
      287,    /* "ac-auditEntity" */
@@ -3849,7 +3853,6 @@ static const unsigned int ln_objs[NUM_LN] = {
      932,    /* "brainpoolP384t1" */
      933,    /* "brainpoolP512r1" */
      934,    /* "brainpoolP512t1" */
-    1218,    /* "brotli" */
      494,    /* "buildingName" */
      860,    /* "businessCategory" */
      691,    /* "c2onb191v4" */

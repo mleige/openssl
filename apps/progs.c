@@ -234,6 +234,9 @@ FUNCTION functions[] = {
 #ifdef BROTLI
     {FT_cipher, "brotli", enc_main, enc_options, NULL},
 #endif
+#ifdef ZSTD
+    {FT_cipher, "zstd", enc_main, enc_options, NULL},
+#endif
 #ifndef OPENSSL_NO_DES
     {FT_cipher, "des", enc_main, enc_options, NULL},
 #endif

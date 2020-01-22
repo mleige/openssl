@@ -5293,6 +5293,10 @@
 #define LN_aes_256_siv          "aes-256-siv"
 #define NID_aes_256_siv         1200
 
-#define SN_brotli               "BROTLI"
-#define LN_brotli               "brotli"
+#define SN_brotli               "brotli"
+#define LN_brotli               "Brotli compression"
 #define NID_brotli              1218
+
+#define SN_zstd         "zstd"
+#define LN_zstd         "Zstandard compression"
+#define NID_zstd                1219
