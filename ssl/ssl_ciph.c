@@ -2191,6 +2191,7 @@ const char *OSSL_default_ciphersuites(void)
            "TLS_AES_128_GCM_SHA256";
 }
 
+#ifndef OPENSSL_NO_QUIC
 int SSL_CIPHER_get_prf_nid(const SSL_CIPHER *c)
 {
     switch (c->algorithm2 & (0xFF << TLS1_PRF_DGST_SHIFT)) {
@@ -2222,3 +2223,4 @@ int SSL_CIPHER_get_prf_nid(const SSL_CIPHER *c)
     }
     return NID_undef;
 }
+#endif
